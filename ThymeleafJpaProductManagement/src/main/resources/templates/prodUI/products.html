@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xlmns:th="https://www.thymeleaf.org/">
+
+<head>
+	<title>Product List </title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<style>
+		body {
+			margin-top: 8%;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<form th:action="@{/prod/search}" class="form-inline">
+
+			<input class="form-control ml-5 mr-sm-2 mb-3" type="search" name="sku" placeholder="Search by Sku" />
+			<button class="btn btn-secondary mb-3" type="submit">Search</button>
+		</form>
+		&nbsp;
+		<table class="table table-bordered">
+			<tr class="table-dark">
+				<th> Id </th>
+				<th> Sku </th>
+				<th> Name </th>
+				<th> Description </th>
+				<th> Unit price </th>
+				<th> Image URL </th>
+				<th> Active </th>
+				<th> Unit in stock </th>
+				<th> Date created </th>
+				<th> Category id</th>
+			</tr>
+
+			<tr th:each="prod : ${PRODUCT}">
+				<td th:text="${prod.id}" />
+				<td th:text="${prod.sku}" />
+				<td th:text="${prod.name}" />
+				<td th:text="${prod.description}" />
+				<td th:text="${prod.unitPrice}" />
+				<td th:text="${prod.imageUrl}" />
+				<td th:text="${prod.active}" />
+				<td th:text="${prod.unitInStock}" />
+				<td th:text="${prod.dateCreated}" />
+				<td th:text="${prod.categoryId}" />
+				<td>
+					<div><a class="btn btn-dark" th:href="@{/prod/updateProd(prodId = ${prod.id} )}">Edit</a></div>
+					&nbsp;
+					<div><a class="btn btn-dark" th:href="@{/prod/delete(prodId = ${prod.id} )}"
+							onclick="if(!(confirm('Are you sure to delete this employee details?'))) ">Delete</a></div>
+
+				</td>
+
+			</tr>
+
+		</table>
+	</div>
+
+
+</body>
+
+</html>
